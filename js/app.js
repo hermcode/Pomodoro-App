@@ -5,6 +5,10 @@ let timer = null
 let timerBreak = null
 let current = 0
 
+const btnMenu = document.querySelector('#btnMenu')
+const aside = document.querySelector('#aside')
+const mainSection = document.querySelector('#mainSection')
+
 const createNewTaskBTN = document.querySelector('#create-task')
 const divForm = document.querySelector('.form')
 const formCloseBtn = document.querySelector('#form-close-btn')
@@ -15,7 +19,25 @@ const bAdd = document.querySelector('#bAdd')
 const taskName = document.querySelector('#time #taskName')
 
 
+
+if(window.innerWidth > 1024) {
+    aside.classList.add('desplegar')
+    mainSection.classList.add('main-w-menu-open')
+} else {
+    aside.classList.remove('desplegar')
+}
+
 function loadEventListeners() {
+
+    btnMenu.addEventListener('click', () => {
+        if(!aside.classList.contains('desplegar')) {
+            aside.classList.add('desplegar')
+            mainSection.classList.add('main-w-menu-open')
+        } else {
+            aside.classList.remove('desplegar')
+            mainSection.classList.remove('main-w-menu-open')
+        }
+    })
 
     form.addEventListener('submit', e => {
         e.preventDefault()
@@ -65,7 +87,7 @@ function renderTasks() {
                 ${
                     task.completed
                     ? `<span class="done">Done</span>` 
-                    : `<button class="start-btn" data-id=${task.id}>Start</button>` 
+                    : `<button class="start-btn" data-id=${task.id}>${task.id != current ? 'Start':'In progress...'}</button>` 
                 }
                
             </div>
@@ -75,10 +97,18 @@ function renderTasks() {
     const tasksContainer = document.querySelector('#tasks')
     tasksContainer.innerHTML = htmlTasks.join('')
 
-    const startButtons = document.querySelectorAll('.task .start-btn')
+    startButtonsListener()
+}
 
+function startButtonsListener() {
+
+    const startButtons = document.querySelectorAll('.task .start-btn')
     startButtons.forEach(startButton => {
         startButton.addEventListener('click', () => {
+
+            if(window.innerWidth < 1024) {
+                aside.classList.remove('desplegar')
+            }
 
             if(!timer) {
                 startButtonHandler(startButton.getAttribute('data-id'))
@@ -88,9 +118,17 @@ function renderTasks() {
     })
 }
 
+function widthProof() {
+    if(window.innerWidth > 1024) {
+        aside.classList.add('desplegar')
+    } else {
+        aside.classList.remove('desplegar')
+    }
+}
+
 function startButtonHandler(id) {
 
-    time = 10
+    time = 25 * 60
     current = id
 
     const taskIndex = tasks.findIndex(task => task.id === id)
@@ -154,7 +192,6 @@ function renderTime() {
     const seconds = parseInt(time % 60)
 
     timeDiv.textContent = `
-        ${minutes < 10 ? "0" : ""}${minutes}:
-        ${seconds < 10 ? "0" : ""}${seconds}
+        ${minutes < 10 ? "0" : ""}${minutes}:${seconds < 10 ? "0" : ""}${seconds}
     `
 }

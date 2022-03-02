@@ -9,40 +9,41 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <aside class="aside">
+    <header>
+        <nav>
+            <i class='bx bx-menu-alt-left' id="btnMenu"></i>
+            <h1>Pomodoro App</h1>
+        </nav>
+    </header>
+
+    <div class="form">
+        <div class="form-container">
+            <i class='bx bx-x' id="form-close-btn"></i>
+            <form action="" id="form">
+
+                <div>
+                    <label for="itTask">Task Name</label>
+                    <input type="text" id="itTask" name="itTask"></input>
+                </div>
+
+                <input type="submit" id="bAdd" value="Add Task" class="create-task-btn mt-2r"></input>
+            </form>
+        </div>
+        
+    </div>
+
+    <aside class="aside" id="aside">
 
         <div class="aside-container">
-
-            <h1 class="mt-4r">Pomodoro App</h1>
-
             <div class="center">
-                <button id="create-task" class="create-task-btn mt-4r">Create new task</button>
+                <button id="create-task" class="create-task-btn mt-2r">Create new task</button>
             </div>
-
-            <div class="form">
-
-                <div class="form-container">
-                    <i class='bx bx-x' id="form-close-btn"></i>
-                    <form action="" id="form">
-
-                        <div>
-                            <label for="itTask">Task Name</label>
-                            <input type="text" id="itTask" name="itTask"></input>
-                        </div>
-    
-                        <input type="submit" id="bAdd" value="Add Task" class="create-task-btn mt-2r"></input>
-                    </form>
-                </div>
-                
-            </div>
-
             <hr class="mt-4r">
-
             <div class="tasks-container" id="tasks"></div>
         </div>
     </aside>
 
-    <main>
+    <main id="mainSection">
         <div id="app">
             <div>
                 <img src="images/undraw_programming_re_kg9v.svg" alt="image working">

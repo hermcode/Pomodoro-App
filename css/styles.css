@@ -14,7 +14,7 @@
     --light-green: #E8F0EB;
 
     --p-desktop-size: 1.8rem;
-    --h1-desktop-size: 3.6rem;
+    --h1-desktop-size: 3rem;
     --button-desktop-size: 1.8rem;
 }
 
@@ -34,6 +34,7 @@ html {
 h1 { 
     font-size: var(--h1-desktop-size); 
     text-align: center;
+    font-size: var(--h1-desktop-size);
 }
 
 img {
@@ -62,24 +63,62 @@ p {
     text-align: center;
 }
 
+body {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    min-height: 60rem;
+}
+
+nav {
+    display: flex;
+    height: 6rem;
+    align-items: center;
+    background-color: var(--light-gray);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+nav i{
+    font-size: 3rem;
+    margin: 0 2rem;
+}
+
+nav i:hover {
+    cursor: pointer;
+}
+
 aside, #app {
     height: 100vh;
-    min-height: 80rem;
+    /* min-height: 80rem; */
 }
 aside {
-    position: absolute;
+    position: fixed;
+    margin: 6rem 0;
     width: 100%;
-    max-width: 45rem;
     background-color: var(--light-gray);
     top: 0;
     left: 0;
     bottom: 0;
-    overflow-y: hidden;
-    
+    overflow-y: scroll; 
+    transform: translateX(-100%);
+    transition: 0.2s;
+}
+
+@media (min-width: 580px) {
+    aside {
+        width: 45rem;
+    }
+}
+
+.desplegar {
+    transform: translateX(0);
 }
 
 aside:hover {
-    overflow-y: auto;
+    overflow-y: scroll;
 }
 
 aside::-webkit-scrollbar {
@@ -122,6 +161,7 @@ aside::-webkit-scrollbar-thumb {
     place-items: center;
     display: none;
     transition: 1s;
+    z-index: 10;
 }
 
 .form-container {
@@ -204,16 +244,28 @@ aside::-webkit-scrollbar-thumb {
 }
 
 #app {
-    margin-left: 45rem;
     display: grid;
     place-items: center;
     text-align: center;
+    width: 100%;
+    min-height: calc(100% - 6rem);
+    transition: 0.2s;
+}
+
+
+
+@media (min-width: 1024px) {
+    .main-w-menu-open {
+        width: calc(100% - 45rem);
+        margin-left: 45rem;
+        transition: 0.2s;
+    }
 }
 
 #time #value {
     margin-top: 2rem;
     font-size: 10rem;
-    font-weight: 500;
+    font-weight: 700;
     color: var(--dark-purple);
 }
 
